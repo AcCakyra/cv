@@ -1,0 +1,44 @@
+name: ci
+
+on:
+  push:
+    branches: '*'
+
+jobs:
+  compile:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - name: Install xelatex compiler
+        run: sudo apt-get install texlive-xetex
+      - name: Install fontawesome
+        run: |
+          sudo apt-get install -y fonts-font-awesome
+          sudo apt-get install texlive-fonts-extra
+      - name: Compile cv
+        run: |
+          xelatex cv.tex
+          xelatex cv.tex
+      - name: 'Upload pdf cv'
+        uses: actions/upload-artifact@v2
+        with:
+          name: cv
+          path: cv.pdf
+          retention-days: 1
+          
+  deploy:
+    needs: compile
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v2
+        with:
+          name: cv
+          path: cv/
+      - name: ssh deploy
+        uses: easingthemes/ssh-deploy@v2.1.5
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.DEPLOY_KEY }}
+          SOURCE: "/cv"
+          REMOTE_HOST: ${{ secrets.DEPLOY_HOST }}
+          REMOTE_USER: ${{ secrets.DEPLOY_USER }}
+          TARGET: ${{ secrets.DEPLOY_TARGET }}
