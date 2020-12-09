@@ -13,17 +13,10 @@
 \defaultfontfeatures{Mapping=tex-text}
 \setmainfont[Path=fonts/, Extension=.ttf, UprightFont=*-Regular, Color=black]{Roboto}
 
-\newcommand{\header}[2]{%
+\newcommand{\header}{%
 \begin{tikzpicture}[remember picture,overlay]
     \node [rectangle, fill=black, anchor=north, minimum width =\paperwidth, minimum height=5cm] (box) at (current page.north){};
-    \node [anchor=east] (name) at (box) {%
-    \fontsize{40pt}{145pt}\color{white}%
-    {\bodyfont #1}
-    {}
-    {\bodyfont #2}
-    };
 \end{tikzpicture}
-\vspace{1cm}
 }
 
 \newcommand{\footer}{%
