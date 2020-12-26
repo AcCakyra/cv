@@ -11,7 +11,12 @@
 
 \newfontfamily\bodyfont{Roboto-Regular}[Path=fonts/]
 \defaultfontfeatures{Mapping=tex-text}
-\setmainfont[Path=fonts/, Extension=.ttf, UprightFont=*-Regular, Color=black]{Roboto}
+\setmainfont[Path=fonts/, Extension=.ttf, UprightFont=*-Regular, Color=black, SizeFeatures={Size=12}]{Roboto}
+
+\newfontfamily\hugeText[Path=fonts/, Extension=.ttf, UprightFont=*-Regular, Color=black, SizeFeatures={Size=32}]{Roboto}
+\newfontfamily\bigText[Path=fonts/, Extension=.ttf, UprightFont=*-Regular, Color=black, SizeFeatures={Size=18}]{Roboto}
+\newfontfamily\boldText[Path=fonts/, Extension=.ttf, UprightFont=*-Bold, Color=black, SizeFeatures={Size=12}]{Roboto}
+
 
 \newcommand{\header}{%
 \begin{tikzpicture}[remember picture,overlay]
@@ -42,7 +47,7 @@
 \setlength{\TPVertModule}{4cm}
 
 \newcommand{\cvsection}[2][]{%
-{\color{black}\Large\bfseries{\MakeUppercase{#2}}}\\[-1ex]%
+{\color{black}\bigText\textbf{\MakeUppercase{#2}}}\\[-1ex]%
 {\color{black}\rule{\linewidth}{2pt}\par}\medskip
 }
 
@@ -64,11 +69,6 @@
 
 \newcommand{\dateDiapason}[1]{
 {\small\makebox[0.2\linewidth][l]{\faCalendar\hspace{0.5em}#1}}
-}
-
-
-\newcommand{\cvskill}[1]{
-\textcolor{black}{\textbf{\large{#1}}}\space\space\space\space\space
 }
 
 \setlength{\parindent}{0pt}
